@@ -27,12 +27,7 @@ jobs:
           version: 8
 
       - name: Install Dependencies
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            pnpm install --frozen-lockfile
-          else
-            pnpm install
-          fi
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build Package
         run: pnpm build
