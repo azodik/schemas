@@ -1,10 +1,10 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const AppInfoSchema = z.object({
   name: z.string(),
   logo: z.string(),
-  language: z.string().default("en"),
-  theme: z.string().default("light"),
+  language: z.string().default('en'),
+  theme: z.string().default('light'),
   privacyPolicyUrl: z.url(),
   termsOfServiceUrl: z.url(),
   cookiePolicyUrl: z.url(),

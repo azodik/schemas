@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export const UserStatusSchema = z.enum(['active', 'inactive', 'suspended']);
+export const UserTypeSchema = z.enum(['owner', 'member', 'user']);
 export const UserSchema = z.object({
   id: z.uuid(),
   tenant_id: z.uuid().optional(),
@@ -25,9 +27,9 @@ export const UserSchema = z.object({
   currency: z.string().optional(),
   mfa_enabled: z.boolean().optional(),
   mfa_enforced: z.boolean().optional(),
-  type: z.enum(['owner', 'member', 'user']).optional(),
+  type: UserTypeSchema.optional(),
   meta_data: z.object().optional(),
-  status: z.enum(['active', 'inactive', 'suspended']).optional(),
+  status: UserStatusSchema.optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
 });
@@ -45,6 +47,8 @@ export const UserUpdateSchema = UserSchema.omit({
 });
 
 export const UserSelectSchema = UserSchema.omit({ password: true });
+export type UserStatus = z.infer<typeof UserStatusSchema>;
+export type UserType = z.infer<typeof UserTypeSchema>;
 export type User = z.infer<typeof UserSelectSchema>;
 export type UserCreate = z.infer<typeof UserCreateSchema>;
 export type UserUpdate = z.infer<typeof UserUpdateSchema>;

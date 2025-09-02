@@ -1,13 +1,16 @@
 import { z } from 'zod';
+import { RegionSchema } from './region';
+
+export const TenantStatusSchema = z.enum(['active', 'inactive', 'suspended']);
 
 export const TenantSchema = z.object({
   id: z.uuid(),
   name: z.string(),
   slug: z.string(),
   description: z.string().optional(),
-  region: z.enum(['in', 'us', 'eu']),
+  region: RegionSchema,
   uid: z.uuid(),
-  status: z.enum(['active', 'inactive', 'suspended']),
+  status: TenantStatusSchema,
   meta_data: z.object().optional(),
   created_at: z.string().optional(),
   updated_at: z.string().optional(),
@@ -29,3 +32,4 @@ export const TenantUpdateSchema = TenantSchema.omit({
 export type Tenant = z.infer<typeof TenantSchema>;
 export type TenantCreate = z.infer<typeof TenantCreateSchema>;
 export type TenantUpdate = z.infer<typeof TenantUpdateSchema>;
+export type TenantStatus = z.infer<typeof TenantStatusSchema>;

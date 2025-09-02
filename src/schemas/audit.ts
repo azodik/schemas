@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { UserSchema } from './users';
 
 export const AuditLogActionSchema = z.enum([
   'TENANT_EMAIL_VERIFICATION',
@@ -25,12 +26,21 @@ export const AuditLogActionSchema = z.enum([
   'USER_VERIFICATION',
 ]);
 
-const UserSchema = z.object({
+export const AuditLogSchema = z.object({
   id: z.string(),
-  name: z.string(),
-  email: z.email(),
-  phone: z.string().optional().nullable(),
-  tenant_id: z.string().optional().nullable(),
+  timestamp: z.string(),
+  action: AuditLogActionSchema,
+  actor_id: z.string(),
+  actor_type: z.string(),
+  actor_name: z.string(),
+  targets: z.string(),
+  description: z.string(),
+  ip_address: z.string(),
+  user_agent: z.string(),
+  tenant_id: z.string(),
+  app_id: z.string(),
+  product_slug: z.string(),
+  meta_data: z.string(),
 });
 
 export const AuditLogOptionsSchema = z.object({
@@ -46,4 +56,3 @@ export const AuditLogOptionsSchema = z.object({
 
 export type AuditLogOptions = z.infer<typeof AuditLogOptionsSchema>;
 export type AuditLogAction = z.infer<typeof AuditLogActionSchema>;
-export type User = z.infer<typeof UserSchema>;
