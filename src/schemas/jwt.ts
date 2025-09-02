@@ -1,10 +1,10 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 const BaseJWKSchema = z.object({
-  kty: z.literal('EC'),
-  crv: z.literal('P-256'),
-  alg: z.literal('ES256'),
-  use: z.literal('sig'),
+  kty: z.literal("EC"),
+  crv: z.literal("P-256"),
+  alg: z.literal("ES256"),
+  use: z.literal("sig"),
   ext: z.literal(true),
   kid: z.string(),
 });
@@ -12,14 +12,14 @@ const BaseJWKSchema = z.object({
 export const ECPublicJWKSchema = BaseJWKSchema.extend({
   x: z.string(),
   y: z.string(),
-  key_ops: z.array(z.literal('verify')),
+  key_ops: z.array(z.literal("verify")),
 });
 
 export const ECPrivateJWKSchema = BaseJWKSchema.extend({
   x: z.string(),
   y: z.string(),
   d: z.string(),
-  key_ops: z.array(z.literal('sign')),
+  key_ops: z.array(z.literal("sign")),
 });
 
 export const JWTTokenPayloadSchema = z.object({
@@ -27,8 +27,8 @@ export const JWTTokenPayloadSchema = z.object({
   tenant_id: z.uuid().optional(),
   app_id: z.uuid().optional(),
   session_id: z.uuid(),
-  region: z.enum(['us', 'eu', 'in']),
-  type: z.enum(['user', 'member', 'owner']),
+  region: z.enum(["us", "eu", "in"]),
+  type: z.enum(["user", "member", "owner"]),
 });
 
 export const JWTSignSchema = z.object({

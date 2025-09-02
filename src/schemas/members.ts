@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { UserSchema } from './users';
+import { z } from "zod";
+import { UserSchema } from "./users";
 
 export const TenantMemberSchema = z.object({
   id: z.uuid(),
@@ -7,8 +7,8 @@ export const TenantMemberSchema = z.object({
   email: z.string(),
   uid: z.uuid(),
   invite_code: z.string(),
-  role: z.enum(['admin', 'member']),
-  status: z.enum(['invited', 'accepted', 'rejected']),
+  role: z.enum(["admin", "member"]),
+  status: z.enum(["invited", "accepted", "rejected"]),
   meta_data: z.object().optional(),
   added_by: z.uuid().optional(),
   accepted_at: z.string().optional(),
