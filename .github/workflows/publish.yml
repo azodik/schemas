@@ -32,6 +32,12 @@ jobs:
       - name: Build Package
         run: pnpm build
 
+      - name: Setup NPM Authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "always-auth=true" >> ~/.npmrc
+          echo "@azodik:registry=https://registry.npmjs.org/" >> ~/.npmrc
+
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
