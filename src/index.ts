@@ -8,3 +8,7 @@ export * from './schemas/jwt';
 export * from './schemas/region';
 export * from './schemas/audit';
 export * from './schemas/app';
+export * from './schemas/auth';
+export * from './schemas/users';
+export * from './schemas/members';
+export * from './schemas/tenants';
